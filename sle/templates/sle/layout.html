@@ -12,19 +12,15 @@
 <body>
     <div id="body">
         <div id="header">
-            <div style="float: left;"><a href="#">Home</a></div>
+            <div style="float: left;"><a href="{% url 'index' %}">Home</a></div>
             <div class="sign-in-links">
                 <div>
-                    <a href="#">Enter</a> |
+                    <a href="#">Enter</a>
                     <a href="#">Register</a>
                 </div>
             </div>
         </div>
         
-        <div class="borderBottomRound borderTopRound boxit">
-            <div>write something here</div>
-        </div>
-
         {% block body %}
         {% endblock %}
         

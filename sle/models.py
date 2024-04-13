@@ -29,7 +29,12 @@ class Course(models.Model):
         'Liberal Arts': 'LA',
         'Departmental Core Theory': 'DCT',
         'Departmental Core Lab': 'DCL',
-        'Free Elective': 'FE'
+        'Free Elective': 'FE',
+        'Basic Science': 'BS',
+        'Basic Engineering Skills': 'BES',
+        'Additional': 'Additional',
+        'Departmental Elective': 'DE',
+        
     }
     elective_type = models.CharField(max_length=60, default='LA', choices=elective_type_choices)
     

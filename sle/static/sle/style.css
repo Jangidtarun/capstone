@@ -18,6 +18,10 @@ body{
     margin: 0 1rem;
 }
 
+#header a{
+    margin-right: 0.5rem;
+}
+
 .sign-in-links{
     float: right;
 }

@@ -1,0 +1,95 @@
+{% extends 'sle/layout.html' %}
+
+{% block body %}
+
+<div class="flexit">
+    <div id="sidebar">
+        <div class="boxit borderTopRound">
+            <div class="caption titled">&rightarrow; Information</div>
+            <div style="padding: 0.5rem;">
+                Information about that thing
+            </div>    
+        </div>
+        <div class="boxit borderTopRound">
+            <div class="caption titled">&rightarrow; Filter</div>
+            <div style="padding: 0.5rem;">
+                Add Some Filters here using forms
+                <!-- <form action="#" method="post">
+                    {% csrf_token %}
+                </form> -->
+            </div>
+        </div>
+    </div>
+    <div class="pagecontent">
+        <div class="second-level-menu">
+            <li><a href="{% url 'index' %}">All Courses</a></li>
+            <li>&CenterDot;</li>
+            <li><a href="{% url 'mycourses' %}">My Courses</a></li>
+        </div>
+        <div class="datatable">
+            <div class="padding-top-left">
+                Courses
+            </div>
+            <div class="dkwod">
+                {% for course in courses %}
+                <div class="courses">
+                    <div class="med">
+                        <a href="#">{{ course.course_code }}</a>
+                    </div>
+                    <div class="column-flex">
+                        <a style="font-weight: 900;" href="#">{{ course.title }}</a>     
+                        <small>{{ course.tutor }}</small>
+                    </div>
+                    
+                    <div class="med">
+                        {% if course.status %}
+                        <div style="color: green;">
+                            Open
+                        </div>
+                        {% else %}
+                        <div style="color: red;">
+                            Closed
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="column-flex">
+                        <small>
+                            {{ course.elective_type }}
+                        </small>
+                        <small><strong>{{ course.credit }}</strong> Credits</small>
+                    </div>
+                    <div class="med">
+                        {% if course.status %}
+                            <a class="btn-link" href="{% url 'enroll' course_id=course.id %}">Enroll</a>
+                        {% else %}
+                            <a class="btn-link disabled" href="#">Enroll</a>
+                        {% endif %}
+                    </div>
+                    
+                </div>                    
+                {% empty %}
+                <div class="courses">
+                    Nothing here
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if courses.has_previous %}
+                    <a href="?page={{ courses.previous_page_number }}">&larrb;</a>
+                {% endif %}
+        
+                <span class="current">
+                    {{ courses.number }} of {{ courses.paginator.num_pages }}
+                </span>
+        
+                {% if courses.has_next %}
+                    <a href="?page={{ courses.next_page_number }}">&rarrb;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

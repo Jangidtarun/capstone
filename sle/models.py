@@ -56,4 +56,10 @@ class Grade(models.Model):
         return self.user.username
 
 
-# 
+# News
+class Update(models.Model):
+    topic = models.CharField(max_length=100)
+    news = models.CharField(max_length=500)
+
+    def __str__(self) -> str:
+        return self.topic

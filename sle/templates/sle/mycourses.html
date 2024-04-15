@@ -5,19 +5,15 @@
 <div class="flexit">
     <div id="sidebar">
         <div class="boxit borderTopRound">
-            <div class="caption titled">&rightarrow; Information</div>
+            <div class="caption titled">&rightarrow; Updates</div>
             <div style="padding: 0.5rem;">
-                Information about that thing
+                {% if news %}
+                    <strong>{{news.topic}}</strong>
+                    <p>{{news.news}}</p>
+                {% else %}
+                    No new updates available
+                {% endif %}
             </div>    
-        </div>
-        <div class="boxit borderTopRound">
-            <div class="caption titled">&rightarrow; Filter</div>
-            <div style="padding: 0.5rem;">
-                Add Some Filters here using forms
-                <!-- <form action="#" method="post">
-                    {% csrf_token %}
-                </form> -->
-            </div>
         </div>
     </div>
     <div class="pagecontent">
@@ -26,9 +22,9 @@
             <li>&CenterDot;</li>
             <li><a href="{% url 'mycourses' %}">My Courses</a></li>
         </div>
-        <div class="datatable">
-            <div class="padding-top-left">
-                Courses
+        <div class="boxit borderTopRound">
+            <div class="caption titled">
+                &rightarrow; Courses
             </div>
             <div class="dkwod">
                 {% for course in courses %}

@@ -3,9 +3,8 @@
 }
 
 body{
-    background-color: #f8f8f8;
+    background-color: #fafafa;
 }
-
 #body{
     padding: 1rem 0;
     max-width: 1200px;
@@ -85,7 +84,7 @@ html .borderBottomRound {
     margin: 1rem;
     min-height: 20rem;
     width: 100%;
-
+    max-width: 900px;
     display: flex;
     flex-direction: column;
     flex: 3;
@@ -288,4 +287,37 @@ li{
 
 .warning{
     color: red;
+}
+
+._FilterByTagsFrame_difficulty{
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+._FilterByTagsFrame_difficulty_grid{
+    display: grid;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+
+._FilterByTagsFrame_difficulty_smaller{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    font-size: 14px;
+}
+
+/* ._FilterByTagsFrame_difficulty input {
+    width: 4rem;
+    height: 1.5rem;
+} */
+
+._FilterByTagsFrame_addTag {
+    font-size: 1.1rem;
+    text-align: right;
+}
+
+._FilterByTagsFrame_button {
+    text-align: center;
 }

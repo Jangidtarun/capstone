@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.core.paginator import Paginator
-from .models import User, Course, Grade
+from .models import User, Course, Grade, Update
 
 # Create your views here.
 
@@ -14,8 +14,10 @@ def index(req):
     paginator = Paginator(courses, 20)
     page_number = req.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    updates = Update.objects.last()
     return render(req, 'sle/index.html', {
-        'courses': page_obj
+        'courses': page_obj,
+        'news': updates
     })
 
 def mycourses(req):
@@ -27,9 +29,30 @@ def mycourses(req):
     paginator = Paginator(ulist, 20)
     page_number = req.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    updates = Update.objects.last()
     return render(req, 'sle/mycourses.html', {
-        'courses': page_obj
+        'courses': page_obj,
+        'news': updates
     })
+
+def filterpage(req):
+    if req.method == 'POST':
+        status = req.POST['status']
+
+
+        if status == "both":
+            courses = Course.objects.all()
+        else:
+            courses = Course.objects.filter(
+                status = status
+            )    
+        
+        paginator = Paginator(courses, 20)
+        page_number = req.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        return render(req, 'sle/index.html', {
+            'courses': page_obj
+        })
 
 def enroll(req, course_id):
     course = Course.objects.get(pk=course_id)

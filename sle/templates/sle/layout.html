@@ -8,18 +8,41 @@
     <title>SLE</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'sle/style.css' %}">
+    <script src="{% static 'sle/sle.js' %}"></script>
 </head>
 <body>
+    <div class="mobile-toolbar">
+        <div class="mobile-toolbar-internals">
+            <img src="//codeforces.org/s/58961/images/icons/icons-ellipsis-v.png" class="mobile-toolbar-sidebar" onclick="hide()">
+        </div>
+    </div>
+
     <div id="body">
         <div id="header">
             <div style="float: left;"><a href="{% url 'index' %}">Home</a></div>
+            {% if user.is_authenticated %}
+            <strong>{{user.username}}</strong>
+            <div class="sign-in-links">
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+            {% else %}
             <div class="sign-in-links">
                 <div>
-                    <a href="#">Enter</a>
-                    <a href="#">Register</a>
+                    <a href="{% url 'login' %}">Enter</a>
+                    <a href="{% url 'register' %}">Register</a>
                 </div>
             </div>
+            {% endif %}
         </div>
+        
+        {% if user.is_authenticated %}
+        <div class="boxit borderTopRound">
+            <div class="caption titled">&rightarrow; User Info</div>
+            <div style="padding: 0.5rem;">
+                <strong>{{user.username}}</strong> &centerdot; {{ user.batch }} &centerdot; {{ user.admission_type }}
+            </div>    
+        </div>
+        {% endif %}
         
         {% block body %}
         {% endblock %}

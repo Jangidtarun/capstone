@@ -50,11 +50,18 @@ html .borderBottomRound {
     margin: 1rem;
 }
 
+
 #sidebar{
     float: right;
     width: 20em;
     padding-top: 0.5rem;
+
 }
+
+@media screen and (min-width: 0px) and (max-width: 590px) {
+    #sidebar {width: 100%;}
+}
+
 
 @media screen and (min-width: 0px) and (max-width: 800px) {
     #sidebar {display: none;}
@@ -204,7 +211,81 @@ li{
     padding-right: 0.5rem;
 }
 
-/* .btn{
-    font-size: 14px;
+.btn{
+    font-size: 16px;
     padding: 0px;
-} */
+}
+
+.auto-margin{
+    margin-left: auto;
+    margin-right: auto;
+    width: 20rem;
+    background-color: #e7e7e7;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.75rem;
+}
+
+.form-control{
+    padding: 0.25rem 0.5rem;
+
+}
+
+.form-control:focus {
+    box-shadow: none;
+    /* border-color: #FF0000; */
+    /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6); */
+  }
+
+
+
+.mobile-toolbar {
+    background-color: #eeeeef;
+    border-bottom: 1px solid #C6C7CC;
+    margin-bottom: 10px;
+    margin-inline: auto;
+}
+
+@media only screen and (max-device-width: 450px) {
+    .mobile-toolbar {
+        display: block;
+        height: 70px;
+    }
+}
+
+@media only screen and (max-device-width: 8000px) {
+    .mobile-toolbar {
+        display: block;
+        height: 2.5rem;
+    }
+}
+
+.mobile-toolbar-internals {
+    height: 100%;
+    padding-inline: 0.5rem;
+}
+
+.mobile-toolbar-sidebar {
+    float: right;
+}
+
+
+@media only screen and (max-device-width: 450px){
+.mobile-toolbar-sidebar {
+    margin-left: 3px;
+    margin-top: 3px;
+    max-width: 64px;
+    max-height: 64px;
+}
+}
+@media only screen and (max-device-width: 8000px){
+.mobile-toolbar-sidebar {
+    margin-left: 3px;
+    margin-bottom: 6px;
+    max-width: 32px;
+    max-height: 32px;
+}}
+
+.warning{
+    color: red;
+}

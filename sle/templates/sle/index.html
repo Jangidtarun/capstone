@@ -58,6 +58,7 @@
                         </small>
                         <small><strong>{{ course.credit }}</strong> Credits</small>
                     </div>
+                    {% if user.is_authenticated %}
                     <div class="med">
                         {% if course.status %}
                             <a class="btn-link" href="{% url 'enroll' course_id=course.id %}">Enroll</a>
@@ -65,6 +66,7 @@
                             <a class="btn-link disabled" href="#">Enroll</a>
                         {% endif %}
                     </div>
+                    {% endif %}
                     
                 </div>                    
                 {% empty %}

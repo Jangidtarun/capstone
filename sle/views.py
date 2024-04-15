@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from .models import User, Course, Grade
 
 # Create your views here.
+
 def index(req):
     courses = Course.objects.all()
     paginator = Paginator(courses, 20)
@@ -45,53 +46,60 @@ def feedback(req, course_id):
     return render(req, 'sle/feedback.html')
 
 
-def login_view(request):
-    if request.method == "POST":
+def login_view(req):
+    if req.method == "POST":
 
         # Attempt to sign user in
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
+        username = req.POST["username"]
+        password = req.POST["password"]
+        user = authenticate(req, username=username, password=password)
 
         # Check if authentication successful
         if user is not None:
-            login(request, user)
+            login(req, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "sle/login.html", {
+            return render(req, "sle/login.html", {
                 "message": "Invalid username and/or password."
             })
     else:
-        return render(request, "sle/login.html")
+        return render(req, "sle/login.html")
 
 
-def logout_view(request):
-    logout(request)
-    return HttpResponseRedirect(reverse("index"))
+def logout_view(req):
+    logout(req)
+    return HttpResponseRedirect(reverse(login_view))
 
 
-def register(request):
-    if request.method == "POST":
-        username = request.POST["username"]
-        email = request.POST["email"]
+def register(req):
+    if req.method == "POST":
+        username = req.POST["username"]
 
         # Ensure password matches confirmation
-        password = request.POST["password"]
-        confirmation = request.POST["confirmation"]
+        password = req.POST["password"]
+        confirmation = req.POST["confirmation"]
         if password != confirmation:
-            return render(request, "sle/register.html", {
+            return render(req, "sle/register.html", {
                 "message": "Passwords must match."
             })
+        
+        batch = req.POST['batch']
+        adtype = req.POST['adtype']
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username, email, password)
+            user = User.objects.create_user(
+                username=username, 
+                password=password,
+                batch=batch,
+                admission_type=User.admission_type_choices[adtype]
+            )
             user.save()
         except IntegrityError:
-            return render(request, "sle/register.html", {
+            return render(req, "sle/register.html", {
                 "message": "Username already taken."
             })
-        login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+        login(req, user)
+        return HttpResponseRedirect(reverse(index))
     else:
-        return render(request, "sle/register.html")
+        return render(req, "sle/register.html")

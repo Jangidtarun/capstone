@@ -9,7 +9,7 @@ class User(AbstractUser):
     batch = models.IntegerField(default=2020)
     admission_type_choices = {
         'regular': 'regular',
-        'distance': 'non-regular'
+        'non-regular': 'distance'
     }
     admission_type = models.CharField(max_length=20, default='regular', choices=admission_type_choices)
 
